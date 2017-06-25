@@ -1,5 +1,7 @@
 'use strict';
 //
+debugger;
+var allStoresCxCount = 0;
 var i = 0;
 var control = 15;
 var firstAndPikeStore = new Store('1st and Pike', 23, 65, 6.3);
@@ -30,6 +32,7 @@ function cookiesPerHour(store) {
   }
 }
 Store.prototype.makeRow = function () {
+  debugger;
   //Step 1 - create the element
   var newRowEl = document.createElement('tr');
   //Step 2 - Mutate the data
@@ -58,11 +61,19 @@ for (var j = 0; j < allStores.length; j++) {
   allStores[j].makeRow();
 }
 var totalPerHour = [];
-function totalArray(control) {
-  debugger;
-  for (var i = 0; i < control; i++) {
-    totalPerHour.push(Math.max(allStores.cookiesPerHour[i]) + (allStores.cookiesPerHour[i]) + (allStores.cookiesPerHour[i]) + (allStores.cookiesPerHour[i]) + (allStores.cookiesPerHour[i]));
-  //  totalPerHour.push();
+function totalArray(control, allStores) {
+  var allStores = [firstAndPikeStore, seaTacStore, seaCenterStore, capitolHillStore, alkiStore];
+  for (var i = 0; i < 5; i++) {
+    for (var j = 0; j < allStores[i].cookiesPerHour; j++){
+      debugger;
+      var total = allStores[i].cookiesPerHour[j];
+      allStoresCxCount += total;
+      if (j === allStores.length){
+        totalPerHour[i] = allStoresCxCount;
+        allStoresCxCount = 0;
+        console.log(totalPerHour);
+      }
+    }
   }
   var newFootEl = document.createElement('tr');
   //tableFootEl.appendChild(newFootEl);
@@ -77,4 +88,4 @@ function totalArray(control) {
   tableEl.appendChild(newFootEl);
   return totalPerHour;
 }
-totalArray(control);
+totalArray(control, allStores );
